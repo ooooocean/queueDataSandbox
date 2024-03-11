@@ -9,6 +9,11 @@ class Queue:
     def is_full(self):
         return bool(self.rear == self.cap)
 
+
+    def is_empty(self):
+        return bool(self.front == -1 and self.rear == -1)
+
+
     def enqueue(self, item):
         # throw overflow error if the queue is full
         if self.is_full():
