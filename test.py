@@ -1,4 +1,3 @@
-import pytest
 import main
 
 def test_create_queue():
