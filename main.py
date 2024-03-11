@@ -2,8 +2,8 @@ class Queue:
     # constructor
     def __init__(self, cap):
         self.cap = cap
-        self.front = 0
-        self.rear = 0
+        self.front = -1
+        self.rear = -1
         self.queue = [0] * cap
 
     def is_full(self):
@@ -11,11 +11,11 @@ class Queue:
 
     def enqueue(self, item):
         # throw overflow error if the queue is full
-        if self.is_full(self):
+        if self.is_full():
             print('Queue is full.')
             return
-        if self.front == 0:
-            self.front = 1
+        if self.front == -1:
+            self.front = 0
         self.rear += 1
         self.queue[self.rear] = item
 
