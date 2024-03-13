@@ -41,4 +41,6 @@ class Queue:
             self.front += 1
         return element
 
+    def peek(self):
+        return self.queue[self.front]
 

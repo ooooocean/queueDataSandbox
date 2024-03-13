@@ -119,3 +119,8 @@ def test_is_full(empty_queue, non_empty_queue, full_queue):
     assert empty_queue.is_full() is False
     assert non_empty_queue.is_full() is False
     assert full_queue.is_full() is True
+
+
+def test_peek(empty_queue, full_queue):
+    assert empty_queue.peek() == 0
+    assert full_queue.peek() == 1
