@@ -227,3 +227,7 @@ def test_reverse_queue():
     x = main.Queue(array=[1, 2, 3, 4])
     main.reverse_queue(x)
     assert x.queue == [4, 3, 2, 1]
+
+def test_binary_from_ternary():
+    assert main.generate_binary_from_ternary(15) == '1111'
+    assert main.generate_binary_from_ternary(77) == '1001101'

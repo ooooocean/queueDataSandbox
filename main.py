@@ -144,16 +144,10 @@ def generate_binary_from_ternary(ternary):
     # define binary length
     binary_length = int(math.log(ternary, 2))
     for n in range(binary_length,-1,-1):
-        print(f'iterating for n={n}')
         if ternary >= pow(2,n):
-            print(f'{ternary} is greater than {pow(2,n)}')
             temp = 1
             ternary = ternary - pow(2,n)
-            print(f'new ternary is {ternary}')
         else:
             temp = 0
-            print(f'{ternary} is less than {pow(2,n)}')
         binary += str(temp)
-        print(f'binary is now {binary}\n')
-    # once recursion is complete, reverse the binary string
     return binary
