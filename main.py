@@ -49,6 +49,7 @@ class CircularQueue:
     # constructor
     def __init__(self, cap):
         Queue.__init__(self, cap)
+        self.cap = cap-1
 
     def is_full(self):
         # queue is full in 2 scenarios:
