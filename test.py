@@ -4,7 +4,7 @@ import main
 
 # verify that creating a queue works correctly
 
-class Test_Queue:
+class TestQueue:
     def test_queue(self):
         empty_queue = main.Queue(cap=3)
         assert empty_queue.queue == [0, 0, 0]
@@ -122,7 +122,7 @@ class Test_Queue:
         assert empty_queue.peek() == 0
         assert full_queue.peek() == 1
 
-class Test_Circular_Queue:
+class TestCircularQueue:
 
     def test_circular_queue_creation(self):
         x = main.CircularQueue(cap=3)
@@ -135,7 +135,7 @@ class Test_Circular_Queue:
     def empty_queue(self):
         return main.CircularQueue(cap=3)
 
-    def test_circular_queue_is_full(self, empty_queue):
+    def test_circular_queue_is_full(self, x):
         x = main.CircularQueue(cap=3)
         x.queue = [1, 1, 1]
         x.front = 0

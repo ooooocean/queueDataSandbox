@@ -52,8 +52,10 @@ class CircularQueue:
 
     def is_full(self):
         # queue is full in 2 scenarios:
-        # 1. if front pointer exceeds rear pointer by 1 - this happens when we've populated circularly
-        # 2. if front pointer is 0 and the rear pointer is at the cap - this happens when we haven't dequeued
-        # or if we've circularly populated to the point where we return to this configuration
+        # 1. if front pointer exceeds rear pointer by 1 - this happens when we've
+        # populated circularly
+        # 2. if front pointer is 0 and the rear pointer is at the cap -
+        # this happens when we haven't dequeued or if we've circularly populated
+        # to the point where we return to this configuration
         return bool((self.front == 0 and self.rear == self.cap)
                     or self.front == self.rear + 1)
