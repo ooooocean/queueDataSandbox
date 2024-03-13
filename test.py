@@ -7,6 +7,7 @@ import main
 class TestQueue:
     def test_queue(self):
         empty_queue = main.Queue(cap=3)
+        print(empty_queue)
         assert empty_queue.queue == [None, None, None]
         assert empty_queue.front == -1
         assert empty_queue.rear == -1
