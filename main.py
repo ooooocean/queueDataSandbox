@@ -159,15 +159,20 @@ def first_non_repeating_helper(string):
     matched = []
 
     while string:
+        print(f'input is {string} with length {len(string)}')
         character = string.popleft()
+        print(f'popped {character}. input is now {string} with {len(string)}')
         length = len(string)
-        if length == 0:
-            character = '#'
-            return character
-        print(f'check if {character} is in matched list: {matched}')
+
         if character in matched:
             print(f'character was found in {matched}, terminating substring check for {character}\n')
+            if length == 0:
+                character = '#'
+                return character
             continue
+        if length == 0:
+            return character
+        print(f'check if {character} is in matched list: {matched}')
         print(f'comparing {character} to {string}')
         print(f'initiate for loop for {range(length)}')
 
@@ -181,7 +186,6 @@ def first_non_repeating_helper(string):
                 break
             # otherwise, we have not matched anything and we can return the character that did not have any repeats
             print(f'{character} is non-repeating\n')
-            character = '#'
             return character
 
 
