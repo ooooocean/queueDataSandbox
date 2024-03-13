@@ -7,7 +7,7 @@ import main
 class TestQueue:
     def test_queue(self):
         empty_queue = main.Queue(cap=3)
-        assert empty_queue.queue == [0, 0, 0]
+        assert empty_queue.queue == [None, None, None]
         assert empty_queue.front == -1
         assert empty_queue.rear == -1
         assert empty_queue.cap == 2
@@ -22,11 +22,11 @@ class TestQueue:
         main.Queue.enqueue(empty_queue, 1)
         assert empty_queue.front == 0
         assert empty_queue.rear == 0
-        assert empty_queue.queue == [1, 0, 0]
+        assert empty_queue.queue == [1, None, None]
         main.Queue.enqueue(empty_queue, 1)
         assert empty_queue.front == 0
         assert empty_queue.rear == 1
-        assert empty_queue.queue == [1, 1, 0]
+        assert empty_queue.queue == [1, 1, None]
         main.Queue.enqueue(empty_queue, 1)
         assert empty_queue.front == 0
         assert empty_queue.rear == 2
@@ -59,54 +59,54 @@ class TestQueue:
         main.Queue.dequeue(empty_queue)
         assert empty_queue.front == -1
         assert empty_queue.rear == -1
-        assert empty_queue.queue == [0, 0, 0]
+        assert empty_queue.queue == [None, None, None]
 
     def test_dequeue_non_empty_queue(self):
         # dequeue a queue which has only one element in the front
         a = main.Queue(cap=3)
         a.front = 0
         a.rear = 0
-        a.queue = [1, 0, 0]
+        a.queue = [1, None, None]
         assert main.Queue.dequeue(a) == 1
         assert a.front == -1
         assert a.rear == -1
-        assert a.queue == [0, 0, 0]
+        assert a.queue == [None, None, None]
 
         # dequeue a queue which has only one element in the middle
         b = main.Queue(cap=3)
         b.front = 1
         b.rear = 1
-        b.queue = [0, 1, 0]
+        b.queue = [None, 1, None]
         assert main.Queue.dequeue(b) == 1
         assert b.front == -1
         assert b.rear == -1
-        assert b.queue == [0, 0, 0]
+        assert b.queue == [None, None, None]
 
         # dequeue a queue which has only one element in the end
         c = main.Queue(cap=3)
         c.front = 2
         c.rear = 2
-        c.queue = [0, 0, 1]
+        c.queue = [None, None, 1]
         assert main.Queue.dequeue(c) == 1
         assert c.front == -1
         assert c.rear == -1
-        assert c.queue == [0, 0, 0]
+        assert c.queue == [None, None, None]
 
     def test_dequeue_full_queue(self, full_queue):
         assert main.Queue.dequeue(full_queue) == 1
         assert full_queue.front == 1
         assert full_queue.rear == 2
-        assert full_queue.queue == [0, 1, 1]
+        assert full_queue.queue == [None, 1, 1]
 
         assert main.Queue.dequeue(full_queue) == 1
         assert full_queue.front == 2
         assert full_queue.rear == 2
-        assert full_queue.queue == [0, 0, 1]
+        assert full_queue.queue == [None, None, 1]
 
         assert main.Queue.dequeue(full_queue) == 1
         assert full_queue.front == -1
         assert full_queue.rear == -1
-        assert full_queue.queue == [0, 0, 0]
+        assert full_queue.queue == [None, None, None]
 
     def test_is_empty(self, empty_queue, non_empty_queue, full_queue):
         assert empty_queue.is_empty() is True
@@ -119,14 +119,14 @@ class TestQueue:
         assert full_queue.is_full() is True
 
     def test_peek(self, empty_queue, full_queue):
-        assert empty_queue.peek() == 0
+        assert empty_queue.peek() == None
         assert full_queue.peek() == 1
 
 class TestCircularQueue:
 
     def test_circular_queue_creation(self):
         x = main.CircularQueue(cap=3)
-        assert x.queue == [0, 0, 0]
+        assert x.queue == [None, None, None]
         assert x.front == -1
         assert x.rear == -1
         assert x.cap == 2
@@ -135,7 +135,7 @@ class TestCircularQueue:
     def empty_queue(self):
         return main.CircularQueue(cap=3)
 
-    def test_circular_queue_is_full(self, x):
+    def test_circular_queue_is_full(self):
         x = main.CircularQueue(cap=3)
         x.queue = [1, 1, 1]
         x.front = 0

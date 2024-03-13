@@ -4,7 +4,7 @@ class Queue:
         self.cap = cap-1
         self.front = -1
         self.rear = -1
-        self.queue = [0] * cap
+        self.queue = [None] * cap
 
     def is_full(self):
         return bool(self.rear == self.cap)
@@ -30,7 +30,7 @@ class Queue:
         element = self.queue[self.front]
 
         # remove element from queue
-        self.queue[self.front] = 0
+        self.queue[self.front] = None
 
         # if this was the last element, e.g. both front and rear point to the same element,
         # then reset pointers
