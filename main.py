@@ -12,8 +12,11 @@ class Queue:
         self.rear = -1
         if cap is not None:
             self.queue = [None] * cap
-            if array is not None:
-                self.queue = array
+        if array is not None:
+            self.queue = array
+            self.front = 0
+            self.cap = (len(array))
+            self.rear = self.cap - 1
 
     def is_full(self):
         return bool(self.rear == self.cap)
@@ -129,12 +132,3 @@ def reverse_queue(queue):
         queue.enqueue(ele)
     return queue
 
-# x = Queue()
-# x.enqueue(4)
-# x.enqueue(3)
-# x.enqueue(1)
-# x.enqueue(10)
-# x.enqueue(2)
-# x.enqueue(6)
-# print(reverse_queue(queue=x))
-# print(x.queue)
