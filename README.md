@@ -1,4 +1,4 @@
-This project is for learning more how to manipulate the stack data type.
+This project is for learning more how to manipulate the queue data type.
 
 I have been completing challenges from [geeksforgeeks](https://www.geeksforgeeks.org/explore?page=1&category=Queue&difficulty=Easy&sortBy=submissions&itm_source=geeksforgeeks&itm_medium=leftbar&itm_campaign=practice_header) and each of these challenges
 are listed on separate branches (for the most part!).
