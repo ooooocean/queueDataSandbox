@@ -7,6 +7,7 @@ import main
 class TestQueue:
     def test_queue(self):
         empty_queue = main.Queue(cap=3)
+        print(empty_queue)
         assert empty_queue.queue == [None, None, None]
         assert empty_queue.front == -1
         assert empty_queue.rear == -1
@@ -216,3 +217,13 @@ def test_circular_queue_dequeue_to_non_empty_queue():
     assert x.front == 0
     assert x.rear == 0
     assert x.queue == [1, None, None]
+
+
+def test_reverse_queue():
+    x = main.Queue(array=[4, 3, 1, 10, 2, 6])
+    main.reverse_queue(x)
+    assert x.queue == [6, 2, 10, 1, 3, 4]
+
+    x = main.Queue(array=[1, 2, 3, 4])
+    main.reverse_queue(x)
+    assert x.queue == [4, 3, 2, 1]

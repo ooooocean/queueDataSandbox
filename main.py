@@ -1,10 +1,22 @@
 class Queue:
     # constructor
-    def __init__(self, cap):
-        self.cap = cap-1
+    def __init__(self, array=None, cap=None):
+        if array is None and cap is None:
+            print('Please specify either array or cap.')
+            return
+        if cap is not None:
+            self.cap = (cap - 1)
+            if array is not None:
+                self.cap = len(array - 1)
         self.front = -1
         self.rear = -1
-        self.queue = [None] * cap
+        if cap is not None:
+            self.queue = [None] * cap
+        if array is not None:
+            self.queue = array
+            self.front = 0
+            self.cap = (len(array))
+            self.rear = self.cap - 1
 
     def is_full(self):
         return bool(self.rear == self.cap)
@@ -47,9 +59,20 @@ class Queue:
 
 class CircularQueue:
     # constructor
-    def __init__(self, cap):
-        Queue.__init__(self, cap)
-        self.cap = cap-1
+    def __init__(self, array=None, cap=None):
+        if array is None and cap is None:
+            print('Please specify either array or cap.')
+            return
+        if cap is not None:
+            self.cap = (cap - 1)
+            if array is not None:
+                self.cap = len(array - 1)
+        self.front = -1
+        self.rear = -1
+        if cap is not None:
+            self.queue = [None] * cap
+            if array is not None:
+                self.queue = array
 
     def is_full(self):
         # queue is full in 2 scenarios:
@@ -101,3 +124,11 @@ class CircularQueue:
             if self.front >= (self.cap + 1):
                 self.front = circle_front
         return element
+
+def reverse_queue(queue):
+    if not queue.is_empty():
+        ele = queue.dequeue()
+        reverse_queue(queue)
+        queue.enqueue(ele)
+    return queue
+
