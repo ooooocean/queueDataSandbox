@@ -32,7 +32,8 @@ class Queue:
         # remove element from queue
         self.queue[self.front] = 0
 
-        # if this was the last element, e.g. both front and rear point to the same element, then reset pointers
+        # if this was the last element, e.g. both front and rear point to the same element,
+        # then reset pointers
         if self.front == self.rear:
             self.front = self.rear = -1
         # otherwise, increase front index
@@ -41,6 +42,3 @@ class Queue:
         return element
 
 
-    # initialises empty queue
-    def create_queue(self):
-        return Queue(self.cap)
