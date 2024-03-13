@@ -1,3 +1,5 @@
+import math
+
 class Queue:
     # constructor
     def __init__(self, array=None, cap=None):
@@ -132,3 +134,26 @@ def reverse_queue(queue):
         queue.enqueue(ele)
     return queue
 
+
+def generate_binary_from_ternary(ternary):
+    # function generates ternary from binary
+
+    # initialise output
+    binary = ''
+
+    # define binary length
+    binary_length = int(math.log(ternary, 2))
+    for n in range(binary_length,-1,-1):
+        print(f'iterating for n={n}')
+        if ternary >= pow(2,n):
+            print(f'{ternary} is greater than {pow(2,n)}')
+            temp = 1
+            ternary = ternary - pow(2,n)
+            print(f'new ternary is {ternary}')
+        else:
+            temp = 0
+            print(f'{ternary} is less than {pow(2,n)}')
+        binary += str(temp)
+        print(f'binary is now {binary}\n')
+    # once recursion is complete, reverse the binary string
+    return binary
