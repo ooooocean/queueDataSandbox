@@ -14,9 +14,17 @@ class Queue:
             self.queue = [None] * cap
         if array is not None:
             self.queue = array
-            self.front = 0
             self.cap = (len(array))
-            self.rear = self.cap - 1
+            for index, ele in enumerate(array):
+                if ele is None and self.front == -1:
+                    self.front = index
+                if ele is None and self.rear == -1 and self.front != -1:
+                    self.rear = index
+                else:
+                    self.front = 0
+                    self.rear = self.cap - 1
+            print(f'queue initialised with front={self.front}, rear={self.rear}, cap={self.cap}, queue={self.queue}')
+
 
     def is_full(self):
         return bool(self.rear == self.cap)
@@ -135,18 +143,49 @@ def reverse_queue(queue):
 def pop_specified_element_from_queue(queue, j):
     """ This function takes a queue and an integer as an input, and returns the element of the queue
     at the given index."""
-    print(queue.queue)
     size = queue.cap
-    temp=Queue(cap=size)
+    temp = []
     for i in range(size):
         i += 1
         if i == j:
             ele = queue.dequeue()
-            print(ele)
-        temp.enqueue(queue.dequeue())
-        print(temp.queue)
-    return [ele, temp]
+        temp.append(queue.dequeue())
+    queue = Queue(array=temp)
+    return {'element': ele,
+            'queue': queue}
+
+def reverse_k_elements(queue, k):
+    # we want to pop elements and increment until the increment is equal to the length of the queue,
+    # subtracted by the number of elements we want to reverse
+
+    # assign input to a temporary variable to avoid editions during for loop
+    temp = Queue(cap=queue.cap)
+    result = Queue(cap=queue.cap)
+
+    size = len(queue.queue)
+    for i in range(size):
+        i += 1
+        print(f'check if {i} = {k}')
+        if i <= k:
+            # assign var to popped element
+            print(f'popping element {k+1-i} from {queue.queue}')
+            pop = pop_specified_element_from_queue(queue, k+1-1)
+            element = pop.get('element')
+            after_pop_queue = pop.get('queue').queue
+            print(f'after pop, element is {element} and queue is {after_pop_queue}')
+            # add popped element to output variable
+            result.enqueue(element)
+            print(f'result queue is now {result.queue}')
+            queue = Queue(array=after_pop_queue)
+            print(f'input queue is now {queue.queue}\n')
+
+        else:
+            result.enqueue(queue.dequeue())
+            print(f'did not equal, do normal enqueue.\n queue is now {result.queue}\n')
 
 
+    print(f'for i={i}, queue is {queue.queue}')
+    return temp
 
-
+x=Queue(array=[1,2,3,4,5])
+reverse_k_elements(x,3)
