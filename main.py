@@ -1,3 +1,5 @@
+from collections import deque
+
 class Queue:
     # constructor
     def __init__(self, array=None, cap=None):
@@ -131,4 +133,58 @@ def reverse_queue(queue):
         reverse_queue(queue)
         queue.enqueue(ele)
     return queue
+
+def first_non_repeating(string):
+    # convert input string to queue
+    stream = deque(string)
+
+    # initialise comparison variable
+    comparator = deque('')
+
+    # assign length of input string
+    length = len(stream)
+    print(length)
+    # generate substring for comparison
+    for i in range(length):
+        i += 1
+        comparator.append(stream.popleft())
+        while comparator:
+            character = comparator.popleft()
+
+def first_non_repeating_helper(string):
+    """ Returns if a string has any repeating characters"""
+    string = deque(string)
+
+    # initialise var to store matched characters
+    matched = []
+
+    while string:
+        character = string.popleft()
+        length = len(string)
+        if length == 0:
+            character = '#'
+            return character
+        print(f'check if {character} is in matched list: {matched}')
+        if character in matched:
+            print(f'character was found in {matched}, terminating substring check for {character}\n')
+            continue
+        print(f'comparing {character} to {string}')
+        print(f'initiate for loop for {range(length)}')
+
+        for i in range(length):
+            i += 1
+            print(f'loop now compares {character} to {string[0]}')
+            if character == string[0]:
+                # if we match a repeating character, add it to a list of matched characters
+                matched.append(string[0])
+                print(f'{character} is first instance of repeat, added to matched list: {matched}\n')
+                break
+            # otherwise, we have not matched anything and we can return the character that did not have any repeats
+            print(f'{character} is non-repeating\n')
+            character = '#'
+            return character
+
+
+
+print(first_non_repeating_helper('zz'))
 
