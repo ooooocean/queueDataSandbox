@@ -62,7 +62,7 @@ class CircularQueue:
                     or self.front == self.rear + 1)
 
     def is_empty(self):
-        return Queue.is_empty()
+        return Queue.is_empty(self)
 
     def enqueue(self, item):
         # throw overflow error if the queue is full
@@ -77,3 +77,28 @@ class CircularQueue:
         if self.rear >= (self.cap + 1):
             self.rear = circle_rear
         self.queue[self.rear] = item
+
+    def dequeue(self):
+        if self.is_empty():
+            print('Queue is empty.')
+            return
+        # if the queue was not empty, then reset value pointed to by front
+        element = self.queue[self.front]
+
+        # remove element from queue
+        self.queue[self.front] = None
+
+
+        # if this was the last element, e.g. both front and rear point to the same element,
+        # then reset pointers
+        if self.front == self.rear:
+            self.front = self.rear = -1
+        # otherwise, increase front index
+        # if this was not the last element, then we circularly increase the front pointer
+        else:
+            self.front += 1
+            circle_front = self.front % (self.cap + 1)
+            if self.front >= (self.cap + 1):
+                self.front = circle_front
+                print(f'front is {self.front}, circular is {circle_front}')
+        return element

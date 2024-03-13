@@ -198,3 +198,21 @@ def test_circular_queue_enqueue_to_non_empty_queue():
     assert x.front == 2
     assert x.rear == 1
     assert x.queue == [1, 1, 1]
+
+def test_circular_queue_dequeue_to_non_empty_queue():
+    x = main.CircularQueue(cap=3)
+    x.queue = [None, 1, 1]
+    x.front = 1
+    x.rear = 2
+    main.CircularQueue.dequeue(x)
+    assert x.front == 2
+    assert x.rear == 2
+    assert x.queue == [None, None, 1]
+
+    x.queue = [1, None, 1]
+    x.front = 2
+    x.rear = 0
+    main.CircularQueue.dequeue(x)
+    assert x.front == 0
+    assert x.rear == 0
+    assert x.queue == [1, None, None]
