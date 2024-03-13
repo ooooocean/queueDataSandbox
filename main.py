@@ -143,10 +143,10 @@ def generate_binary_from_ternary(ternary):
 
     # define binary length
     binary_length = int(math.log(ternary, 2))
-    for n in range(binary_length,-1,-1):
-        if ternary >= pow(2,n):
+    for n in range(binary_length, -1, -1):
+        if ternary >= pow(2, n):
             temp = 1
-            ternary = ternary - pow(2,n)
+            ternary = ternary - pow(2, n)
         else:
             temp = 0
         binary += str(temp)
