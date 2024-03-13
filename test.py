@@ -156,3 +156,45 @@ class TestCircularQueue:
 
         x.front = x.rear = 1
         assert x.is_full() is False
+
+    def test_circular_queue_enqueue_to_full_queue(self):
+        x = main.CircularQueue(cap = 3)
+        x.queue = [1, 1, 1]
+        x.front = 0
+        x.rear = 2
+        main.CircularQueue.enqueue(x, 1)
+        assert x.front == 0
+        assert x.rear == 2
+        assert x.queue == [1, 1, 1]
+
+        x.front = 1
+        x.rear = 0
+        main.CircularQueue.enqueue(x, 1)
+        assert x.front == 1
+        assert x.rear == 0
+        assert x.queue == [1, 1, 1]
+
+        x.front = 2
+        x.rear = 1
+        main.CircularQueue.enqueue(x, 1)
+        assert x.front == 2
+        assert x.rear == 1
+        assert x.queue == [1, 1, 1]
+
+def test_circular_queue_enqueue_to_non_empty_queue():
+    x = main.CircularQueue(cap=3)
+    x.queue = [None, 1, 1]
+    x.front = 1
+    x.rear = 2
+    main.CircularQueue.enqueue(x, 1)
+    assert x.front == 1
+    assert x.rear == 0
+    assert x.queue == [1, 1, 1]
+
+    x.queue = [1, None, 1]
+    x.front = 2
+    x.rear = 3
+    main.CircularQueue.enqueue(x, 1)
+    assert x.front == 2
+    assert x.rear == 1
+    assert x.queue == [1, 1, 1]

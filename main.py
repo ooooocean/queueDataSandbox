@@ -60,3 +60,20 @@ class CircularQueue:
         # to the point where we return to this configuration
         return bool((self.front == 0 and self.rear == self.cap)
                     or self.front == self.rear + 1)
+
+    def is_empty(self):
+        return Queue.is_empty()
+
+    def enqueue(self, item):
+        # throw overflow error if the queue is full
+        if self.is_full():
+            print('Queue is full.')
+            return
+        if self.front == -1:
+            self.front = 0
+        self.rear += 1
+        # assign new pointer to var
+        circle_rear = self.rear % (self.cap + 1)
+        if self.rear >= (self.cap + 1):
+            self.rear = circle_rear
+        self.queue[self.rear] = item
