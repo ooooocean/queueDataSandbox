@@ -1,6 +1,7 @@
 import pytest
 import main
 
+
 # verify that creating a queue works correctly
 
 class Test_Queue:
@@ -31,8 +32,6 @@ class Test_Queue:
         assert empty_queue.rear == 2
         assert empty_queue.queue == [1, 1, 1]
 
-
-
     @pytest.fixture()
     def non_empty_queue(self):
         z = main.Queue(cap=3)
@@ -49,19 +48,18 @@ class Test_Queue:
         y.queue = [1] * 3
         return y
 
-    def test_enqueue_to_full_queue(self,full_queue):
+    def test_enqueue_to_full_queue(self, full_queue):
         main.Queue.enqueue(full_queue, 1)
         assert full_queue.front == 0
         assert full_queue.rear == 2
         assert full_queue.queue == [1, 1, 1]
 
-    def test_dequeue_empty_queue(self,empty_queue):
+    def test_dequeue_empty_queue(self, empty_queue):
         # dequeue an empty queue
         main.Queue.dequeue(empty_queue)
         assert empty_queue.front == -1
         assert empty_queue.rear == -1
         assert empty_queue.queue == [0, 0, 0]
-
 
     def test_dequeue_non_empty_queue(self):
         # dequeue a queue which has only one element in the front
@@ -110,19 +108,51 @@ class Test_Queue:
         assert full_queue.rear == -1
         assert full_queue.queue == [0, 0, 0]
 
-
     def test_is_empty(self, empty_queue, non_empty_queue, full_queue):
         assert empty_queue.is_empty() is True
         assert non_empty_queue.is_empty() is False
         assert full_queue.is_empty() is False
-
 
     def test_is_full(self, empty_queue, non_empty_queue, full_queue):
         assert empty_queue.is_full() is False
         assert non_empty_queue.is_full() is False
         assert full_queue.is_full() is True
 
-
     def test_peek(self, empty_queue, full_queue):
         assert empty_queue.peek() == 0
         assert full_queue.peek() == 1
+
+class Test_Circular_Queue:
+
+    def test_circular_queue_creation(self):
+        x = main.CircularQueue(cap=3)
+        assert x.queue == [0, 0, 0]
+        assert x.front == -1
+        assert x.rear == -1
+        assert x.cap == 2
+
+    @pytest.fixture
+    def empty_queue(self):
+        return main.CircularQueue(cap=3)
+
+    def test_circular_queue_is_full(self, empty_queue):
+        x = main.CircularQueue(cap=3)
+        x.queue = [1, 1, 1]
+        x.front = 0
+        x.rear = 2
+        assert x.is_full() is True
+
+        x.front = 1
+        x.rear = 0
+        assert x.is_full() is True
+
+        x.front = 2
+        x.rear = 1
+        assert x.is_full() is True
+
+        x.front = 2
+        x.rear = 0
+        assert x.is_full() is False
+
+        x.front = x.rear = 1
+        assert x.is_full() is False
