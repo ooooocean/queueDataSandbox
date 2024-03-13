@@ -132,3 +132,21 @@ def reverse_queue(queue):
         queue.enqueue(ele)
     return queue
 
+def pop_specified_element_from_queue(queue, j):
+    """ This function takes a queue and an integer as an input, and returns the element of the queue
+    at the given index."""
+    print(queue.queue)
+    size = queue.cap
+    temp=Queue(cap=size)
+    for i in range(size):
+        i += 1
+        if i == j:
+            ele = queue.dequeue()
+            print(ele)
+        temp.enqueue(queue.dequeue())
+        print(temp.queue)
+    return [ele, temp]
+
+
+
+
