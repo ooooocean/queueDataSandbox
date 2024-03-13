@@ -100,5 +100,4 @@ class CircularQueue:
             circle_front = self.front % (self.cap + 1)
             if self.front >= (self.cap + 1):
                 self.front = circle_front
-                print(f'front is {self.front}, circular is {circle_front}')
         return element
