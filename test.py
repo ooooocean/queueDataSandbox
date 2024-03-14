@@ -227,3 +227,12 @@ def test_reverse_queue():
     x = main.Queue(array=[1, 2, 3, 4])
     main.reverse_queue(x)
     assert x.queue == [4, 3, 2, 1]
+
+def test_non_repeating_helper():
+    assert main.first_non_repeating_helper('aabc') == 'b'
+    assert main.first_non_repeating_helper('zz') == '#'
+    assert main.first_non_repeating_helper('aabbccddeef') == 'f'
+
+def test_non_repeating():
+    assert main.first_non_repeating('aabc') == 'a#bb'
+    assert main.first_non_repeating('zz') == 'z#'

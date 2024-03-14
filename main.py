@@ -1,3 +1,5 @@
+from collections import deque
+
 class Queue:
     # constructor
     def __init__(self, array=None, cap=None):
@@ -131,4 +133,50 @@ def reverse_queue(queue):
         reverse_queue(queue)
         queue.enqueue(ele)
     return queue
+
+def first_non_repeating(string):
+    # convert input string to queue
+    stream = deque(string)
+
+    # initialise comparison variable and output variable
+    comparator_string = ''
+    result = ''
+
+    # assign length of input string to a variable
+    length = len(stream)
+
+    # trigger the helper function for each substring
+    for i in range(length):
+        i += 1
+        comparator_string += stream.popleft()
+        result += first_non_repeating_helper(comparator_string)
+    return result
+
+def first_non_repeating_helper(text):
+    """ Returns if a string has any repeating characters"""
+    string = deque(text)
+
+    # initialise var to store matched characters
+    matched = []
+
+    while string:
+        character = string.popleft()
+        length = len(string)
+
+        if character in matched:
+            if length == 0:
+                character = '#'
+                return character
+            continue
+        if length == 0:
+            return character
+
+        for i in range(length):
+            i += 1
+            if character == string[0]:
+                # if we match a repeating character, add it to a list of matched characters
+                matched.append(string[0])
+                break
+            # otherwise, we have not matched anything and we can return the character that did not have any repeats
+            return character
 
