@@ -138,57 +138,45 @@ def first_non_repeating(string):
     # convert input string to queue
     stream = deque(string)
 
-    # initialise comparison variable
-    comparator = deque('')
+    # initialise comparison variable and output variable
+    comparator_string = ''
+    result = ''
 
-    # assign length of input string
+    # assign length of input string to a variable
     length = len(stream)
-    print(length)
-    # generate substring for comparison
+
+    # trigger the helper function for each substring
     for i in range(length):
         i += 1
-        comparator.append(stream.popleft())
-        while comparator:
-            character = comparator.popleft()
+        comparator_string += stream.popleft()
+        result += first_non_repeating_helper(comparator_string)
+    return result
 
-def first_non_repeating_helper(string):
+def first_non_repeating_helper(text):
     """ Returns if a string has any repeating characters"""
-    string = deque(string)
+    string = deque(text)
 
     # initialise var to store matched characters
     matched = []
 
     while string:
-        print(f'input is {string} with length {len(string)}')
         character = string.popleft()
-        print(f'popped {character}. input is now {string} with {len(string)}')
         length = len(string)
 
         if character in matched:
-            print(f'character was found in {matched}, terminating substring check for {character}\n')
             if length == 0:
                 character = '#'
                 return character
             continue
         if length == 0:
             return character
-        print(f'check if {character} is in matched list: {matched}')
-        print(f'comparing {character} to {string}')
-        print(f'initiate for loop for {range(length)}')
 
         for i in range(length):
             i += 1
-            print(f'loop now compares {character} to {string[0]}')
             if character == string[0]:
                 # if we match a repeating character, add it to a list of matched characters
                 matched.append(string[0])
-                print(f'{character} is first instance of repeat, added to matched list: {matched}\n')
                 break
             # otherwise, we have not matched anything and we can return the character that did not have any repeats
-            print(f'{character} is non-repeating\n')
             return character
-
-
-
-print(first_non_repeating_helper('zz'))
 

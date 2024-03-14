@@ -232,3 +232,7 @@ def test_non_repeating_helper():
     assert main.first_non_repeating_helper('aabc') == 'b'
     assert main.first_non_repeating_helper('zz') == '#'
     assert main.first_non_repeating_helper('aabbccddeef') == 'f'
+
+def test_non_repeating():
+    assert main.first_non_repeating('aabc') == 'a#bb'
+    assert main.first_non_repeating('zz') == 'z#'
