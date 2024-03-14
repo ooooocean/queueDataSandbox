@@ -1,4 +1,6 @@
 from collections import deque
+import math
+
 
 class Queue:
     # constructor
@@ -113,7 +115,6 @@ class CircularQueue:
         # remove element from queue
         self.queue[self.front] = None
 
-
         # if this was the last element, e.g. both front and rear point to the same element,
         # then reset pointers
         if self.front == self.rear:
@@ -127,12 +128,14 @@ class CircularQueue:
                 self.front = circle_front
         return element
 
+
 def reverse_queue(queue):
     if not queue.is_empty():
         ele = queue.dequeue()
         reverse_queue(queue)
         queue.enqueue(ele)
     return queue
+
 
 def first_non_repeating(string):
     # convert input string to queue
@@ -151,6 +154,7 @@ def first_non_repeating(string):
         comparator_string += stream.popleft()
         result += first_non_repeating_helper(comparator_string)
     return result
+
 
 def first_non_repeating_helper(text):
     """ Returns if a string has any repeating characters"""
@@ -179,4 +183,44 @@ def first_non_repeating_helper(text):
                 break
             # otherwise, we have not matched anything and we can return the character that did not have any repeats
             return character
+
+
+def max_diamonds(number_of_bags, minutes, diamond_array):
+    return True
+
+
+def max_diamonds_helper(number_of_bags, diamond_array):
+    """ Function to select the bag to take, and return the number of diamonds.
+     Input of array should be in queue format already."""
+
+    # initialise var to store value of largest bag
+    largest_bag = 0
+
+    # pop each element until array is empty, saving the value of the highest value and its index
+    for i in range(number_of_bags):
+        i += 1
+        temp = diamond_array.popleft()
+        if temp > largest_bag:
+            largest_bag = temp
+            index = i
+        # add the popped element back to the end of the queue
+        diamond_array.append(temp)
+
+    # once for loop completes, perform the dropping of the diamonds
+    diamonds = math.ceil(largest_bag / 2)
+
+    # loop again to reinsert the new value of the bag
+    for i in range(number_of_bags):
+        i += 1
+        temp = diamond_array.popleft()
+        if i == index:
+            diamond_array.append(temp - diamonds)
+        else:
+            diamond_array.append(temp)
+
+    return diamonds
+
+    # time complexity is O(n) -> one loop in algorithm
+    # auxiliary space complexity calculation: O(1). vars are i, index, temp and diamonds
+
 

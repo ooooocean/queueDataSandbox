@@ -1,3 +1,5 @@
+from collections import deque
+
 import pytest
 import main
 
@@ -236,3 +238,9 @@ def test_non_repeating_helper():
 def test_non_repeating():
     assert main.first_non_repeating('aabc') == 'a#bb'
     assert main.first_non_repeating('zz') == 'z#'
+
+def test_max_diamonds_helper():
+    x = main.deque([2,1,7,4,2])
+    n = len(x)
+    assert main.max_diamonds_helper(n, x) == 4
+    assert x == deque([2,1,3,4,2])
